@@ -4,7 +4,13 @@
   "description": "Self-hosted community platform.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "docker compose build",
+    "start": "docker compose up",
+    "start:prod": "docker compose up db server web -d",
+    "stop": "docker compose down",
+    "clean": "docker system prune -af",
+    "clean:volumes": "docker volume prune -f",
+    "db:migrate": "node cmd/db-migrate"
   },
   "repository": {
     "type": "git",
@@ -16,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Barkoczy/megatherium/issues"
   },
-  "homepage": "https://github.com/Barkoczy/megatherium#readme"
+  "homepage": "https://github.com/Barkoczy/megatherium#readme",
+  "dependencies": {
+    "child_process": "^1.0.2"
+  }
 }

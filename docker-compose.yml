@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: megatherium-db
+    image: 'bitnami/postgresql:latest'
+    env_file:
+      - .env
+    volumes:
+      - './volumes/db:/bitnami/postgresql'
+    ports:
+      - '${POSTGRESQL_PORT}:5432'
+    networks:
+      - megatherium
+    
+  server:
+    container_name: megatherium-server
+    build:
+      context: server
+      target: ${NODE_ENV}
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - '${SERVER_PORT}:3000'
+    networks:
+      - megatherium
+
+  prisma:
+    container_name: megatherium-prisma
+    build:
+      context: server/prisma
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - /app/prisma
+    ports:
+      - '${PRISMA_PORT}:5555'
+    networks:
+      - megatherium
+
+  web:
+    container_name: megatherium-web
+    build:
+      context: web
+      target: ${NODE_ENV}
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - server
+      - prisma
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - '${WEB_PORT}:3000'
+    networks:
+      - megatherium
+
+networks:
+  megatherium:
+    driver: bridge
