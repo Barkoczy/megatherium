@@ -51,7 +51,7 @@ npx prisma migrate dev --name init
 
 # NestJS
 
-## Setup
+#### Setup
 
 Setting up a new project is quite simple with the Nest CLI. With npm installed, you can create a new Nest project with the following commands in your OS terminal:
 
