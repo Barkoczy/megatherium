@@ -1,6 +1,6 @@
 # NextJS
 
-## Disable telemetry
+### Disable telemetry
 
 ```bash
 https://nextjs.org/telemetry
@@ -10,7 +10,7 @@ https://nextjs.org/telemetry
 
 # Prisma
 
-## Setup
+### Setup
 
 As a first step, navigate into server project directory that contains the package.json file.
 
