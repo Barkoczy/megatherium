@@ -16,8 +16,8 @@ model User {
   lastname String?
   middlename String?
   fullname String?
-  username String
-  email String
+  username String @unique
+  email String @unique
   password String
   refreshToken String?
   updatedAt DateTime @default(now())

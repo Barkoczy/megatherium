@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       envFilePath: join(process.cwd(), '../.env'),
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
