@@ -3,7 +3,6 @@ FROM node:lts-alpine3.17 as development
 WORKDIR /app
 
 COPY package*.json ./
-COPY prisma ./prisma/
 
 RUN npm install
 RUN npx prisma generate

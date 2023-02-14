@@ -44,7 +44,7 @@ services:
     env_file:
       - .env
     volumes:
-      - /app/prisma
+      - ./server/prisma:/app
     ports:
       - '${PRISMA_PORT}:5555'
     networks:
