@@ -16,6 +16,7 @@ model User {
   lastname String
   middlename String?
   fullname String
+  username String
   email String
   password String
   refreshToken String?

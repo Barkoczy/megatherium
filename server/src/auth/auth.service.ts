@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAuthInput } from './dto/create-auth.input';
+import { SignUpInput } from './dto/signup.input';
 import { UpdateAuthInput } from './dto/update-auth.input';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class AuthService {
-  create(createAuthInput: CreateAuthInput) {
+  constructor(private prisma: PrismaService);
+  create(signUpInput: SignUpInput) {
     return 'This action adds a new auth';
   }
 

@@ -74,7 +74,7 @@ Start by installing the required packages
 npm i @nestjs/graphql @nestjs/apollo graphql apollo-server-express
 ```
 
-configure file '@server/src/app.module.ts'
+configure file '@server/src/app.module.ts':
 
 ```bash
 import { Module } from '@nestjs/common';
@@ -98,6 +98,16 @@ import { join } from 'path';
 })
 export class AppModule {}
 ```
+
+#### Fix endline error issues
+
+In .eslintrc.json file, you should configure rules option. Add the following configuration and it will fix the problem.
+
+```bash
+'prettier/prettier': ['error', { 'endOfLine': 'auto' }]
+```
+
+<https://stackoverflow.com/questions/70473135/delete-eslintprettier-prettier>
 
 ### How to fix "running scripts is disabled on this system"?
 

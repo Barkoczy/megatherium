@@ -7,23 +7,37 @@ type Auth {
   exampleField: Int!
 }
 
+type User {
+  id: Int!
+  username: String!
+  email: String!
+}
+
+type SignResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
 type Query {
   auth(id: Int!): Auth!
 }
 
 type Mutation {
-  createAuth(createAuthInput: CreateAuthInput!): Auth!
+  signup(signUpInput: SignUpInput!): SignResponse!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
   removeAuth(id: Int!): Auth!
 }
 
-input CreateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+input SignUpInput {
+  username: String!
+  email: String!
+  password: String!
 }
 
 input UpdateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  username: String
+  email: String
+  password: String
   id: Int!
 }
