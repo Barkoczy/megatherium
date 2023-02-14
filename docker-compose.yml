@@ -4,6 +4,7 @@ services:
   db:
     container_name: megatherium-db
     image: 'bitnami/postgresql:latest'
+    restart: unless-stopped
     env_file:
       - .env
     volumes:
@@ -19,10 +20,13 @@ services:
       context: server
       target: ${NODE_ENV}
       dockerfile: Dockerfile
+    restart: unless-stopped
     depends_on:
       - db
     env_file:
       - .env
+    volumes:
+      - ./server:/app
     ports:
       - '${SERVER_PORT}:3000'
     networks:
@@ -33,6 +37,7 @@ services:
     build:
       context: server/prisma
       dockerfile: Dockerfile
+    restart: unless-stopped
     depends_on:
       - db
     env_file:
@@ -50,6 +55,7 @@ services:
       context: web
       target: ${NODE_ENV}
       dockerfile: Dockerfile
+    restart: unless-stopped
     depends_on:
       - db
       - server
