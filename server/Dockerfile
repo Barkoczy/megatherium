@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 RUN npx prisma generate
 
 CMD ["npm", "run", "dev"]
@@ -18,7 +18,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-RUN npm install
+RUN npm ci
 RUN npx prisma generate
 
 COPY . .
