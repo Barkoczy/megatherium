@@ -32,7 +32,6 @@ type Mutation {
   signin(signInInput: SignInInput!): SignResponse!
   logout(id: Int!): LogoutResponse!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
-  removeAuth(id: Int!): Auth!
 }
 
 input SignUpInput {

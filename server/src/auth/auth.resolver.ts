@@ -40,9 +40,4 @@ export class AuthResolver {
   updateAuth(@Args('updateAuthInput') updateAuthInput: UpdateAuthInput) {
     return this.authService.update(updateAuthInput.id, updateAuthInput);
   }
-
-  @Mutation(() => Auth)
-  removeAuth(@Args('id', { type: () => Int }) id: number) {
-    return this.authService.remove(id);
-  }
 }
