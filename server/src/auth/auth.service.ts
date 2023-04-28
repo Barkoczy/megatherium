@@ -106,6 +106,30 @@ export class AuthService {
     return { loggedOut: true };
   }
 
+  async getNewTokens(userId: number, currentRefreshToken: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    if (!user || !user.refreshToken) {
+      throw new ForbiddenException('Access Denied');
+    }
+    const doRefreshTokensMatch = await argon.verify(
+      user.refreshToken,
+      currentRefreshToken,
+    );
+    if (!doRefreshTokensMatch) {
+      throw new ForbiddenException('Access Denied');
+    }
+    const { accessToken, refreshToken } = await this.createTokens(
+      user.id,
+      user.email,
+    );
+    await this.updateRefreshToken(user.id, refreshToken);
+    return { accessToken, refreshToken, user };
+  }
+
   findAll() {
     return `This action returns all auth`;
   }
@@ -114,6 +138,7 @@ export class AuthService {
     return `This action returns a #${id} auth`;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updateAuthInput: UpdateAuthInput) {
     return `This action updates a #${id} auth`;
   }
